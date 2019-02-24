@@ -10,34 +10,25 @@ Java 1.8 and Ant 1.10.5 were used by the author.
 
 Sample program output: 
 
-Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL . 
-Countries?  
-JP   
-Phones?  
-ALL  
+Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL . <br />
+Countries?  <br />
+JP   <br />
+Phones?  <br />
+ALL  <br />
 
-The following matching testers were found with: [ALL] in: [JP] . 
-Lucas Lowry=>117, Last login: 2013-07-12 23:57:38 . 
-Sean Wellington=>116, Last login: 2013-08-05 13:27:38 . 
-Mingquan Zheng=>109, Last login: 2013-08-04 22:07:38 . 
+The following matching testers were found with: [ALL] in: [JP] <br />
+Lucas Lowry=>117, Last login: 2013-07-12 23:57:38 <br />
+Sean Wellington=>116, Last login: 2013-08-05 13:27:38 <br />
+Mingquan Zheng=>109, Last login: 2013-08-04 22:07:38 <br />
 
-Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL.   
-Countries?    
-US   
-Phones?    
-iPhone 3, iPhone 5   
+Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL. <br />
+Countries? <br />
+US <br />
+Phones? <br />
+iPhone 3, iPhone 5 <br />
 
-The following matching testers were found with: [iPhone 3, iPhone 5] in: [US].   
-Miguel Bautista=>65, Last login: 2013-08-04 23:57:38 . 
+The following matching testers were found with: [iPhone 3, iPhone 5] in: [US].   <br />
+Miguel Bautista=>65, Last login: 2013-08-04 23:57:38 <br />
 
-Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL.   
-Countries?    
-US   
-Phones?    
-ALL 
 
-The following matching testers were found with: [ALL] in: [US]. 
-Taybin Rutkin=>125, Last login: 2013-01-01 10:57:38. 
-Miguel Bautista=>114, Last login: 2013-08-04 23:57:38. 
-Michael Lubavin=>99, Last login: 2013-07-12 13:27:18  
 
