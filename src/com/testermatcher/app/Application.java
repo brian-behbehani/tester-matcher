@@ -37,17 +37,28 @@ public class Application {
 		
 		Scanner in = new Scanner(System.in);
 		while(true) {
-			System.out.println("Please enter the search criteria.");
+			System.out.println("Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL");
 
-			System.out.println("Country?");
-			String country = in.nextLine();
-
-			System.out.println("Phone?");
-			String phone = in.nextLine();
-
+			System.out.println("Countries?");
+			String countriesString = in.nextLine();
+			String[] countryStringArray = countriesString.split(",");
+			List<String> countries = new ArrayList<String>();
+			for(String country : countryStringArray) {
+				countries.add(country.trim());
+			}
+			
+			System.out.println("Phones?");
+			String phonesString = in.nextLine();
+			String[] phoneStringArray = phonesString.split(",");
+			List<String> phones = new ArrayList<String>();
+			for(String phone : phoneStringArray) {
+				phones.add(phone.trim());
+			}
+			
 			System.out.println();
-			Map<Tester, Integer> matchingTesters = findMatchingTesters(country, phone, testerList);
-			printResults(country, phone, matchingTesters);
+			
+			Map<Tester, Integer> matchingTesters = findMatchingTesters(countries, phones, testerList);
+			printResults(countries, phones, matchingTesters);
 		}
 
 	}
@@ -60,23 +71,28 @@ public class Application {
 	 * @param testerMap
 	 * @return a map of matching testers as Tester,Experience
 	 */
-	private static Map<Tester, Integer> findMatchingTesters(String country, String phoneDescription, List<Tester> testers) {
+	private static Map<Tester, Integer> findMatchingTesters(List<String> countries, List<String> phones, List<Tester> testers) {
 		Map<Tester, Integer> testerResultMap = new HashMap<Tester, Integer>();
 
 		for(Tester tester : testers) {
 
-			if(tester.getCountry().equals(country) || country.equals("ALL")) {
+			if(countries.contains(tester.getCountry()) || countries.contains("ALL")) {
 				List<Device> testerDevices = new ArrayList<Device>(tester.getDevices().values());
 
 				for(Device device : testerDevices) {
-					if(device.getDescription().contains(phoneDescription) || phoneDescription.equals("ALL")) {
+					
+					if(phones.contains(device.getDescription()) || phones.contains("ALL")) {
 
 						boolean testerInResultAlready = testerResultMap.containsKey(tester);
+						
+						Integer additionalExperience = tester.getExperience().get(device);
+						
 						if(testerInResultAlready) {
 							Integer relatedDeviceExperience = testerResultMap.get(tester);
-							testerResultMap.replace(tester, (tester.getExperience().get(device) + relatedDeviceExperience));
+							Integer totalExperience = additionalExperience + relatedDeviceExperience;
+							testerResultMap.put(tester, ((additionalExperience!= null)?totalExperience:relatedDeviceExperience));
 						} else {
-							testerResultMap.put(tester, tester.getExperience().get(device));
+							testerResultMap.put(tester, ( (additionalExperience != null) ? additionalExperience:0));
 						}
 					}
 				}
@@ -93,7 +109,7 @@ public class Application {
 	 * @param phone
 	 * @param testerResultMap
 	 */
-	private static void printResults(String country, String phone, Map<Tester, Integer> testerResultMap) {
+	private static void printResults(List<String> country, List<String> phone, Map<Tester, Integer> testerResultMap) {
 
 		List<Entry<Tester, Integer>> list = new ArrayList<>(testerResultMap.entrySet());
 		list.sort(Entry.comparingByValue(Collections.reverseOrder()));
@@ -104,9 +120,9 @@ public class Application {
 		}
 
 		if(result.isEmpty()) {
-			System.out.println("There were no matching testers found with: " + phone + " in country: " + country);
+			System.out.println("There were no matching testers found with: " + phone + " in: " + country);
 		} else {
-			System.out.println("The following matching testers were found with: " + phone + " in country: " + country);
+			System.out.println("The following matching testers were found with: " + phone + " in: " + country);
 			StringBuilder resultString = new StringBuilder();
 			for(Tester tester : result.keySet()) {
 				Integer experience = result.get(tester);
@@ -221,7 +237,7 @@ public class Application {
 				String deviceId = record.get("deviceId");
 				String testerId = record.get("testerId");
 
-				TesterDevice testerDevice = new TesterDevice(deviceId, testerId);
+				TesterDevice testerDevice = new TesterDevice(testerId, deviceId);
 				testerDeviceList.add(testerDevice);
 			}
 		}
@@ -284,7 +300,7 @@ public class Application {
 				String id = record.get("bugId");
 				String deviceId = record.get("deviceId");
 				String testerId = record.get("testerId");
-				Bug bug = new Bug(id, deviceId, testerId);
+				Bug bug = new Bug(id, testerId, deviceId);
 				bugMap.put(id, bug);
 			}
 		}
