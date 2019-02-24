@@ -45,7 +45,7 @@ public class Application {
 			System.out.println("Phone?");
 			String phone = in.nextLine();
 
-			System.out.println("\n");
+			System.out.println();
 			Map<Tester, Integer> matchingTesters = findMatchingTesters(country, phone, testerList);
 			printResults(country, phone, matchingTesters);
 		}
