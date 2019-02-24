@@ -41,5 +41,3 @@ Taybin Rutkin=>125, Last login: 2013-01-01 10:57:38
 Miguel Bautista=>114, Last login: 2013-08-04 23:57:38
 Michael Lubavin=>99, Last login: 2013-07-12 13:27:18
 
-Please enter the search criteria. For multiple values, please separate using a comma. To choose all, enter ALL
-Countries?
