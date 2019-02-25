@@ -7,6 +7,8 @@ The project is built with ant, so you'll need ant and java to build and run.
 
 Java 1.8 and Ant 1.10.5 were used by the author.
 
+To start the app, run the jar which is built in the dist dir:
+java -jar dist/testerMatcher.jar
 
 Sample program output: 
 
